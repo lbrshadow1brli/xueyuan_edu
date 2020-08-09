@@ -25,7 +25,6 @@ public class CodeGenerator {
         gc.setAuthor("dxq");
         gc.setOpen(false);
         gc.setFileOverride(false);
-        gc.setServiceName("%Service");
         gc.setIdType(IdType.ID_WORKER);
         gc.setDateType(DateType.ONLY_DATE);
         gc.setSwagger2(true);
@@ -55,7 +54,7 @@ public class CodeGenerator {
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_teacher");
+        strategy.setInclude("edu_course","edu_course_description");
 
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setTablePrefix(pc.getModuleName() + "_");
