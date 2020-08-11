@@ -54,7 +54,7 @@ public class CodeGenerator {
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_course","edu_course_description");
+        strategy.setInclude("edu_subject");
 
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setTablePrefix(pc.getModuleName() + "_");
