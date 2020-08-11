@@ -4,9 +4,12 @@ package com.online.edu.eduservice.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.online.edu.common.R;
 import com.online.edu.eduservice.entity.EduSubject;
+import com.online.edu.eduservice.entity.subject.OneSubject;
 import com.online.edu.eduservice.service.IEduSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,6 +27,7 @@ public class EduSubjectController {
     @Autowired
     private IEduSubjectService iEduSubjectService;
 
+    //添加课程分类
     @PostMapping("addSubject")
     public R addSubject(@RequestBody EduSubject eduSubject) {
 
@@ -59,6 +63,17 @@ public class EduSubjectController {
             return R.error();
         }
 
+    }
+
+    //获取课程列表（树形）
+    @GetMapping("getAllSubject")
+    public R getAllSubject() {
+
+        //一级分类有二级分类的列表，所以返回一级分类
+        List<OneSubject> list = iEduSubjectService.getAllOneTwoSubject();
+
+
+        return R.ok().data("list", list);
     }
 }
 
