@@ -75,5 +75,18 @@ public class EduSubjectController {
 
         return R.ok().data("list", list);
     }
+
+    //获取二级分类列表
+    @PostMapping("getTwoLevelList")
+    public R getTwoLevelList(@RequestParam(value = "parentId") String parentId) {
+
+        QueryWrapper<EduSubject> wrapper = new QueryWrapper<>();
+        wrapper.eq("parent_id", parentId);
+
+
+        List<EduSubject> subjectList = iEduSubjectService.list(wrapper);
+
+        return R.ok().data("list",subjectList);
+    }
 }
 

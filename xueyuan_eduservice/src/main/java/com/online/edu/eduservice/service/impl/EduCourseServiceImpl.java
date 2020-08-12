@@ -29,7 +29,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     //添加课程信息
     @Override
-    public Boolean insertCouseInfo(CourseInfoForm courseInfoForm) {
+    public String savaCourseInfo(CourseInfoForm courseInfoForm) {
 
         //1 课程基本信息到课程表
 
@@ -44,6 +44,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         if (result == 0) {
             throw new EduException(20001, "添加课程信息失败");
         }
+
         //2 课程描述到课程描述表
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
         //获取描述内容
@@ -52,8 +53,9 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         //获取课程id
         String courseId = eduCourse.getId();
         eduCourseDescription.setId(courseId);
+
         boolean save = eduCourseDescriptionService.save(eduCourseDescription);
 
-        return save;
+        return courseId;
     }
 }

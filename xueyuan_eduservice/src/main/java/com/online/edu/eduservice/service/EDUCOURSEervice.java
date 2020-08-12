@@ -14,5 +14,5 @@ import com.online.edu.eduservice.entity.form.CourseInfoForm;
  */
 public interface EDUCOURSEervice extends IService<EduCourse> {
 
-    Boolean insertCouseInfo(CourseInfoForm courseInfoForm);
+    String savaCourseInfo(CourseInfoForm courseInfoForm);
 }

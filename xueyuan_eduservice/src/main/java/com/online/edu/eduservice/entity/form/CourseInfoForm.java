@@ -22,4 +22,6 @@ public class CourseInfoForm {
     private String cover;
 
     private String description;
+
+    private String subjectParentId;
 }

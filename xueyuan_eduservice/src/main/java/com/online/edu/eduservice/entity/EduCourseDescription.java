@@ -29,6 +29,7 @@ public class EduCourseDescription implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    //INPUT是手动输入
     @TableId(value = "id", type = IdType.INPUT)
     private String id;
 

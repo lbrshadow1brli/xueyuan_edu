@@ -6,20 +6,17 @@ import com.online.edu.eduservice.entity.form.CourseInfoForm;
 import com.online.edu.eduservice.service.EDUCOURSEervice;
 import com.online.edu.eduservice.service.impl.EduCourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author dxq
  * @since 2020-08-04
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/eduservice/course")
 public class EduCourseController {
@@ -31,13 +28,10 @@ public class EduCourseController {
     @PostMapping
     public R addCourse(@RequestBody CourseInfoForm courseInfoForm) {
 
-        Boolean flag = eduCourseService.insertCouseInfo(courseInfoForm);
+        String id = eduCourseService.savaCourseInfo(courseInfoForm);
 
-        if (flag) {
-            return R.ok();
-        } else {
-            return R.error();
-        }
+        //返回添加之后课程id
+        return R.ok().data("courseId", id);
     }
 }
 
