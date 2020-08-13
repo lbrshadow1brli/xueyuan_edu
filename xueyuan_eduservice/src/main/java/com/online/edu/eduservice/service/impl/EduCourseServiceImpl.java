@@ -27,7 +27,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Autowired
     private EDUCOURSEDESCRIPTIONervice eduCourseDescriptionService;
 
-    //添加课程信息
+    //1 添加课程信息
     @Override
     public String savaCourseInfo(CourseInfoForm courseInfoForm) {
 
@@ -57,5 +57,38 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         boolean save = eduCourseDescriptionService.save(eduCourseDescription);
 
         return courseId;
+    }
+
+    //2 根据课程id查询课程基本信息
+    @Override
+    public CourseInfoForm getCourseInfo(String courseId) {
+
+        //1.先查课程信息
+        EduCourse eduCourse = baseMapper.selectById(courseId);
+
+        //2.再通过descroptionService查课程描述
+        EduCourseDescription courseDescription = eduCourseDescriptionService.getById(courseId);
+
+        CourseInfoForm courseInfoForm = new CourseInfoForm();
+        BeanUtils.copyProperties(eduCourse, courseInfoForm);
+        courseInfoForm.setDescription(courseDescription.getDescription());
+
+        return courseInfoForm;
+    }
+
+    //3 根据id修改课程基本信息
+    @Override
+    public void updateCourseInfo(CourseInfoForm courseInfoForm) {
+
+        EduCourse eduCourse = new EduCourse();
+        BeanUtils.copyProperties(courseInfoForm, eduCourse);
+        int update = baseMapper.updateById(eduCourse);
+        if (update == 0) {
+            throw new EduException(20001, "修改课程信息失败");
+        }
+        EduCourseDescription eduCourseDescription = new EduCourseDescription();
+        eduCourseDescription.setId(courseInfoForm.getId());
+        eduCourseDescription.setDescription(courseInfoForm.getDescription());
+        eduCourseDescriptionService.updateById(eduCourseDescription);
     }
 }

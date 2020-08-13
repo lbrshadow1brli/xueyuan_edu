@@ -15,4 +15,8 @@ import com.online.edu.eduservice.entity.form.CourseInfoForm;
 public interface EDUCOURSEervice extends IService<EduCourse> {
 
     String savaCourseInfo(CourseInfoForm courseInfoForm);
+
+    CourseInfoForm getCourseInfo(String courseId);
+
+    void updateCourseInfo(CourseInfoForm courseInfoForm);
 }

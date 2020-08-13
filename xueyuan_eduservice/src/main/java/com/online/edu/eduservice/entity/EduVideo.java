@@ -1,7 +1,5 @@
 package com.online.edu.eduservice.entity;
 
-import java.math.BigDecimal;
-
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
@@ -21,44 +19,36 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author dxq
- * @since 2020-08-04
+ * @since 2020-08-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="EduCourse对象", description="")
-public class EduCourse implements Serializable {
+@ApiModel(value="EduVideo对象", description="")
+public class EduVideo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.ID_WORKER_STR)
+    @TableId(value = "id", type = IdType.ID_WORKER)
     private String id;
 
-    private String teacherId;
+    private String coureseId;
 
-    private String subjectId;
+    private String chapterId;
 
     private String title;
 
-    private BigDecimal price;
+    private String videoSourceId;
 
-    private Integer lessonNum;
+    private String videoOriginalName;
 
-    private String cover;
-
-    private Long buyCount;
-
-    private Long viewCount;
-
-    private Long version;
-
-    private String status;
-
-    private String subjectParentId;
+    private Long playCount;
 
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
+
 }
