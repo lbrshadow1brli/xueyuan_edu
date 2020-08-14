@@ -5,6 +5,7 @@ import com.online.edu.eduservice.entity.EduChapter;
 import com.online.edu.eduservice.entity.EduVideo;
 import com.online.edu.eduservice.entity.chapter.ChapterVo;
 import com.online.edu.eduservice.entity.chapter.VideoVo;
+import com.online.edu.eduservice.handler.EduException;
 import com.online.edu.eduservice.mapper.EduChapterMapper;
 import com.online.edu.eduservice.service.IEduChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -77,5 +78,21 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         }
 
         return finalChapterList;
+    }
+
+    @Override
+    public void deleteChapter(String chapterId) {
+        //根据章节id查询video表，如果有数据，就不进行删除
+        QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
+        wrapper.eq("chapter_id", chapterId);
+
+        int count = iEduVideoService.count(wrapper);
+
+        if (count > 0) {
+            throw new EduException(20001, "章节下有数据，不能进行删除");
+        } else {
+            int result = baseMapper.deleteById(chapterId);
+        }
+
     }
 }

@@ -2,11 +2,14 @@ package com.online.edu.eduservice.controller;
 
 
 import com.online.edu.common.R;
+import com.online.edu.eduservice.entity.EduCourse;
 import com.online.edu.eduservice.entity.form.CourseInfoForm;
 import com.online.edu.eduservice.service.EDUCOURSEervice;
 import com.online.edu.eduservice.service.impl.EduCourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -49,6 +52,15 @@ public class EduCourseController {
         eduCourseService.updateCourseInfo(courseInfoForm);
 
         return R.ok();
+    }
+
+    //4 获取所有课程
+    @GetMapping("getCourseList")
+    public R getCourseList() {
+
+        List<EduCourse> list = eduCourseService.list(null);
+
+        return R.ok().data("list", list);
     }
 }
 
