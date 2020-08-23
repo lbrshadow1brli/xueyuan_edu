@@ -31,6 +31,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
     @Autowired
     private IEduVideoService iEduVideoService;
 
+    // 获取课程的章节列表
     @Override
     public List<ChapterVo> getChapterVideoByCourseId(String courseId) {
 
@@ -80,6 +81,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         return finalChapterList;
     }
 
+    // 删除章节
     @Override
     public void deleteChapter(String chapterId) {
         //根据章节id查询video表，如果有数据，就不进行删除
