@@ -62,5 +62,18 @@ public class EduCourseController {
 
         return R.ok().data("list", list);
     }
+
+    //5 删除课程
+        @DeleteMapping("deleteCourse/{id}")
+    public R deleteCourse(@PathVariable String id) {
+
+        boolean remove = eduCourseService.removeById(id);
+
+        if (remove) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
 }
 
