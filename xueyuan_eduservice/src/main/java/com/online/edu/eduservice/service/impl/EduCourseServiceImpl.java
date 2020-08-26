@@ -3,6 +3,7 @@ package com.online.edu.eduservice.service.impl;
 import com.online.edu.eduservice.entity.EduCourse;
 import com.online.edu.eduservice.entity.EduCourseDescription;
 import com.online.edu.eduservice.entity.form.CourseInfoForm;
+import com.online.edu.eduservice.entity.vo.CoursePublishVo;
 import com.online.edu.eduservice.handler.EduException;
 import com.online.edu.eduservice.mapper.EduCourseMapper;
 import com.online.edu.eduservice.service.EDUCOURSEDESCRIPTIONervice;
@@ -90,5 +91,14 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         eduCourseDescription.setId(courseInfoForm.getId());
         eduCourseDescription.setDescription(courseInfoForm.getDescription());
         eduCourseDescriptionService.updateById(eduCourseDescription);
+    }
+
+    // 查询课程所有信息
+    @Override
+    public CoursePublishVo publishCourseInfo(String id) {
+
+        CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
+
+        return publishCourseInfo;
     }
 }

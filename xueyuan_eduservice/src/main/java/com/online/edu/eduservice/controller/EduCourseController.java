@@ -4,6 +4,7 @@ package com.online.edu.eduservice.controller;
 import com.online.edu.common.R;
 import com.online.edu.eduservice.entity.EduCourse;
 import com.online.edu.eduservice.entity.form.CourseInfoForm;
+import com.online.edu.eduservice.entity.vo.CoursePublishVo;
 import com.online.edu.eduservice.service.EDUCOURSEervice;
 import com.online.edu.eduservice.service.impl.EduCourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class EduCourseController {
     }
 
     //5 删除课程
-        @DeleteMapping("deleteCourse/{id}")
+    @DeleteMapping("deleteCourse/{id}")
     public R deleteCourse(@PathVariable String id) {
 
         boolean remove = eduCourseService.removeById(id);
@@ -74,6 +75,22 @@ public class EduCourseController {
         } else {
             return R.error();
         }
+    }
+
+    //6 查询课程所有信息
+    @GetMapping("getPublishCourseInfo/{id}")
+    public R getPublishCourseInfo(@PathVariable String id) {
+
+        CoursePublishVo coursePublishVo = eduCourseService.publishCourseInfo(id);
+
+        return R.ok().data("PublishCourse", coursePublishVo);
+    }
+
+    //7 课程最终发布 修改课程状态
+    @PostMapping("publishCourse/{id}")
+    public R publishCourse(@PathVariable String id) {
+
+        
     }
 }
 
