@@ -9,6 +9,8 @@ import com.online.edu.eduservice.mapper.EduCourseMapper;
 import com.online.edu.eduservice.service.EDUCOURSEDESCRIPTIONervice;
 import com.online.edu.eduservice.service.EDUCOURSEervice;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.online.edu.eduservice.service.IEduChapterService;
+import com.online.edu.eduservice.service.IEduVideoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     //在EduCourseService中调用EduCourseDescriptionService来操纵EduCourseDescription的方法
     @Autowired
     private EDUCOURSEDESCRIPTIONervice eduCourseDescriptionService;
+
+    @Autowired
+    private IEduVideoService iEduVideoService;
+
+    @Autowired
+    private IEduChapterService iEduChapterService;
 
     //1 添加课程信息
     @Override
@@ -100,5 +108,21 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
 
         return publishCourseInfo;
+    }
+
+    //删除课程
+    @Override
+    public void removeCourse(String courseId) {
+        //1 删除小节
+        iEduVideoService.removeVideoByCourseId(courseId);
+
+        //2 删除章节
+        iEduChapterService.removeChapterByCourseId(courseId);
+
+        //3 删除描述
+        eduCourseDescriptionService.removeById(courseId);
+
+        //4 删除课程
+        baseMapper.deleteById(courseId);
     }
 }

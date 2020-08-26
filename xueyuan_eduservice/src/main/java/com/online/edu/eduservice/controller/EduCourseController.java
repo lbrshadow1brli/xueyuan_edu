@@ -65,16 +65,12 @@ public class EduCourseController {
     }
 
     //5 删除课程
-    @DeleteMapping("deleteCourse/{id}")
-    public R deleteCourse(@PathVariable String id) {
+    @DeleteMapping("deleteCourse/{courseId}")
+    public R deleteCourse(@PathVariable String courseId) {
 
-        boolean remove = eduCourseService.removeById(id);
+        eduCourseService.removeCourse(courseId);
 
-        if (remove) {
-            return R.ok();
-        } else {
-            return R.error();
-        }
+        return R.ok();
     }
 
     //6 查询课程所有信息
@@ -90,7 +86,13 @@ public class EduCourseController {
     @PostMapping("publishCourse/{id}")
     public R publishCourse(@PathVariable String id) {
 
-        
+        EduCourse eduCourse = eduCourseService.getById(id);
+
+        eduCourse.setStatus("Normal");
+
+        eduCourseService.updateById(eduCourse);
+
+        return R.ok();
     }
 }
 
