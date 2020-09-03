@@ -18,8 +18,8 @@ public class testVod {
 
         String accessKeyId = "LTAI4GD68W9FjZRN8AEEFfVC";
         String accessKeySecret = "gGCTbzi854i4jKz1Patp68fBNhjlMM";
-        String title = "VID_202009";
-        String fileName = "D:/VID_202009.mp4"; //文件路径名称
+        String title = "dsdddsdsa";
+        String fileName = "D:/aaa.mp4"; //文件路径名称
 
         //上传视频
         UploadVideoRequest request = new UploadVideoRequest(accessKeyId, accessKeySecret, title, fileName);
