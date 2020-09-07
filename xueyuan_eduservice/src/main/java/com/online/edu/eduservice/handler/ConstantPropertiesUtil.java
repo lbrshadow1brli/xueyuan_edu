@@ -4,8 +4,10 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-//在服务器启动时候，让这个类读取配置文件内容
+//此类的作用：读取配置文件，达到在配置文件中定义全局变量
+//！要加上这个注解
 @Component
+//！要继承这个类 implements InitializingBean
 public class ConstantPropertiesUtil implements InitializingBean {
 
     //服务器启动时候，ConstantPropertiesUtil初始化，调用afterPropertiesSet读取配置文件内容
